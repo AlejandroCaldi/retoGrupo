@@ -14,7 +14,7 @@ $(document).ready(function () {
 
                 $.get("http://localhost:1234/api/partidos", function (data) {
 
-
+                    console.log(data);
                     let $padre = $('#listado');
                     let $maestro = $("maestro");
 
@@ -322,7 +322,7 @@ $(document).ready(function () {
 
             let envio = {
                 id: 0,
-                partido: partido_nuevo,
+                nombre: partido_nuevo,
                 descripcion: descripcion_nuevo,
                 deporte: deporte_nuevo,
                 resultado: parseInt(resultado_nuevo),
@@ -348,17 +348,18 @@ $(document).ready(function () {
 
         } else {
 
-            if (nombre_nuevo == "" ||
+            if (partido_nuevo == "" ||
                 descripcion_nuevo == "" ||
-                cantidad_nuevo == "" ||
-                precio_nuevo == "") {
+                deporte_nuevo == "" || 
+                resultado_nuevo == "" ||
+                apuesta_nuevo == "") {
 
                 alert("Todos los campos deben ser completados.");
             }
 
-            if (cantidad_nuevo < 0 || precio_nuevo <= 0) {
+            if (apuesta_nuevo <= 0) {
 
-                alert("Precio no puede ser cero o menor. Cantida no puede ser negativa")
+                alert("La apuesta no puede ser cero o menor.")
             }
 
         }

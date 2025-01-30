@@ -67,7 +67,13 @@
                 </div>
                 <div class="horizontal">
                     <label for="deporte_nuevo">Deporte:</label>
-                    <input type="text" id="deporte_nuevo" name="deporte_nuevo" class="Roboto" required>
+                    <select id="deporte_nuevo" name="deporte_nuevo">
+                        <option value="Futbol">Futbol</option>
+                        <option value="Baloncesto">Baloncesto</option>
+                        <option value="Pelota Vasca">Pelota Vasca</option>
+                        <option value="Sprint en Patines de Felpa">Sprint en Patines de Felpa</option>
+                    </select>
+                    <br>
                 </div>
                 <div class="horizontal">
                     <label for="resultado_nuevo">Resultado Nuevo:</label>
@@ -91,26 +97,39 @@
 
     </nuevo>
 
-    <cambioprecio id="edicion" hidden>
+    <editaapuesta id="edicion" hidden>
         <form id="edicion_registro">
             <datafield>
                 <legend> Edición </legend>
                 <div class="horizontal">
                     <input type="hidden" id="id_edicion" name="id_edicion" hidden>
-                    <label for="nombre_edicion">Nombre del partido:</label>
-                    <input type="text" id="nombre_edicion" name="nombre_edicion" required>
+                    <label for="partido_edicion">Nombre del partido:</label>
+                    <input type="text" id="partido_edicion" name="partido_edicion" required>
                 </div>
                 <div class="horizontal">
                     <label for="descripcion_edicion">Descripción del partido:</label>
                     <input type="text" id="descripcion_edicion" name="descripcion_edicion" required>
                 </div>
                 <div class="horizontal">
-                    <label for="cantidad_edicion">Deporte: </label>
-                    <input type="number" id="cantidad_edicion" name="cantidad_edicion" required>
+                    <label for="deporte_edicion">Deporte: </label>
+                    <select id="resultado_edicion" name="resultado_edicion">
+                        <option value="Futbol">Futbol</option>
+                        <option value="Baloncesto">Baloncesto</option>
+                        <option value="Pelota Vasca">Pelota Vasca</option>
+                        <option value="Sprint en Patines de Felpa">Sprint en Patines de Felpa</option>
+                    </select>
                 </div>
                 <div class="horizontal">
-                    <label for="precio_edicion">Cantidad nueva a apostar: </label>
-                    <input type="number" id="precio_edicion" name="precio_edicion" required>
+                    <label for="resultado_nuevo">Resultado Nuevo:</label>
+                    <select id="resultado_nuevo" name="resultado_nuevo">
+                        <option value="1">1</option>
+                        <option value="0">0</option>
+                        <option value="-1">-1</option>
+                    </select>
+                    <div class="horizontal">
+                        <label for="apuesta_edicion">Apuesta:</label>
+                        <input type="number" id="apuesta_edicion" name="apuesta_edicion" class="Roboto" required>
+                    </div>
                 </div>
                 <div class="horizontal">
                     <button id="boton_graba_edicion" class="btn btn-success">Grabar</button>
@@ -118,7 +137,7 @@
                 </div>
             </datafield>
         </form>
-    </cambioprecio>
+    </editaapuesta>
 
 
 </body>
