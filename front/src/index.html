@@ -17,11 +17,6 @@
 <body>
     <header>
         <header class="titulo">Apuestas Tomadas</header>
-
-        <div class="posicion">
-            <button id="boton_lista" class="btn btn-info btn-lg"> Refrescar </button>
-            <button id="boton_nuevo" class="btn btn-warning btn-lg"> Agregar Apuesta </button>
-        </div>
     </header>
     <br>
     <maestro hidden>
@@ -34,8 +29,8 @@
             <thead class="thead-dark container table table-bordered">
 
                 <Id hidden>ID Producto</Id>
-                <th class="text-center">Partido</th>
-                <th class="text-center">Descripción</th>
+                <th class="text-center">Partido:</th>
+                <th class="text-center">Descripción:</th>
 
 
                 <th class="text-center">Deporte</th>
@@ -50,8 +45,14 @@
             </tbody>
         </table>
 
-    </maestro>
+        <div class="posicion">
+            <button id="boton_lista" class="btn btn-info btn-lg">Refrescar</button>
+            <button id="boton_nuevo" class="btn btn-warning btn-lg">Agregar Apuesta</button>
+        </div>
 
+
+    </maestro>
+    
     <nuevo id="nuevo" hidden>
         <form class="vertical" id="registracion">
             <datafield>
@@ -68,7 +69,7 @@
                 </div>
                 <div class="horizontal">
                     <label for="cantidad_nuevo">Deporte:</label>
-                    <input type="number" id="cantidad_nuevo" name="cantidad_nuevo" class="Roboto" required>
+                    <input type="text" id="cantidad_nuevo" name="cantidad_nuevo" class="Roboto" required>
                 </div>
                 <div class="horizontal">
                     <label for="resultado_nuevo">Resultado:</label>

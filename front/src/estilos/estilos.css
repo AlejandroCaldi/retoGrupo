@@ -55,16 +55,17 @@ table-bordered {
   width: 70% !important;
 }
 
-  .posicion {
+.posicion {
 
-    margin-top: 3%;
+  margin-top: 20px;
+  text-align: center; 
 
- }
+}
 
- #boton_lista{
+#boton_lista {
 
   margin-right: 2%;
-  
+
   border-style: solid;
 
   border-width: 1px;
@@ -72,9 +73,9 @@ table-bordered {
   border-color: rgb(126, 182, 255);
 
   box-shadow: 0px 4px 0px #2d7c94;
- }
+}
 
- #boton_nuevo{
+#boton_nuevo {
 
   border-style: solid;
 
@@ -83,14 +84,4 @@ table-bordered {
   border-color: rgb(247, 130, 130);
 
   box-shadow: 0px 4px 0px #cc7000;
- }
-
-
- .titulo{
-
-  
-  
-
- }
-
-
+}
