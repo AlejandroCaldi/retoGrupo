@@ -1,4 +1,12 @@
 
+.titulo{
+  font-size: 60px;
+  font-family: 'Times New Roman', Times, serif;
+  text-align: center;
+  background-color: #B3E5FC;
+  text-decoration: underline;
+}
+
 body{
 
     margin-left: 10px;
