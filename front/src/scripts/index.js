@@ -176,7 +176,7 @@ $(document).ready(function () {
     });
 
 
-    // Habilita los controles para el cambio de precio
+    // Habilita los controles para la edición de los valores de un registro. 
     $('#listado').on("click", ".boton_edicion", function (event) {
         event.preventDefault();
 
@@ -236,7 +236,7 @@ $(document).ready(function () {
             if (prodNombre.length == 0 ||
                 prodDescripcion.length == 0) {
 
-                alert("Todos los campos deben ser completados. Can");
+                alert("Todos los campos deben ser completados.");
 
             } else {
 
@@ -253,34 +253,33 @@ $(document).ready(function () {
     });
 
 
-    // Dar de baja un producto. 
+    // Dar de baja una apuesta. 
     $('#listado').on("click", ".boton_baja", function (event) {
 
         event.preventDefault()
 
         let $row = $(this).closest('tr');
-        let solId = $row.find('td').eq(0).text();
+        let Id = $row.find('td').eq(0).text();
 
-        console.log("Id es: " + solId);
+        console.log("Id es: " + Id);
 
         if (confirm("Está seguro de que desea BORRAR este registro?")) {
             $.ajax({
-                url: 'http://localhost:1234/api/productos/' + solId,
+                url: 'http://localhost:1234/api/partidos/' + Id,
                 method: "DELETE",
                 contentType: "application/json",
                 success: function (result) {
 
-                    console.log("resultado de la compra: " + result)
+                    console.log("Resultado del borrado: " + result)
 
                 },
                 error: function (xhr, status, error) {
 
-                    console.log("resultado de la compra: " + error)
+                    console.log("No se ha podido borrar el registro: " + error)
 
                 }
             });
         } else {
-            // If the user clicked "Cancel", do nothing
             console.log("Operación de borrado cancelada.");
         }
 
