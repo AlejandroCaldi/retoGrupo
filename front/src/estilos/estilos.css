@@ -38,3 +38,33 @@ table-bordered {
 .table-nonfluid {
     width: 70% !important;
  }
+
+  .posicion {
+
+    margin-top: 3%;
+
+ }
+
+ #boton_lista{
+
+  margin-right: 2%;
+  
+  border-style: solid;
+
+  border-width: 1px;
+
+  border-color: rgb(126, 182, 255);
+
+  box-shadow: 0px 4px 0px #2d7c94;
+ }
+
+ #boton_nuevo{
+
+  border-style: solid;
+
+  border-width: 1px;
+
+  border-color: rgb(247, 130, 130);
+
+  box-shadow: 0px 4px 0px #cc7000;
+ }
