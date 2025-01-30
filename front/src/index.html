@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </link>
+    <script src="../node_modules/jquery/dist/jquery.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.min.js"></script>
+    <script src="./scripts/index.js"></script>
+    <link href="estilos/estilos.css" rel="stylesheet" />
+    <link rel="icon" type="image/x-icon" href="./estilos/warehouse.ico">
+    <title>Manejo Inventario</title>
+</head>
+
+<body>
+    <header>
+        <h1> Inventario</h1>
+
+        <button id="boton_lista" class="btn btn-info btn-lg"> Refrescar </button>
+        <button id="boton_nuevo" class="btn btn-warning btn-lg"> Agregar Producto </button>
+    </header>
+    <br>
+    <maestro hidden>
+
+        <p>Filtrar por:</p>  
+        <input class="form-control table-nonfluid" id="filtrado" type="text" placeholder="Filtrar...">
+        <br>
+
+        <table class="table table-nonfluid" >
+            <thead class="thead-dark container table table-bordered">
+
+                <Id hidden>ID Producto</Id>
+                <th class="text-center">Nombre</th>
+                <th class="text-center">Descripción</th>
+                <th class="text-center">Cantidad (U.)</th>
+                <th class="text-center">Precio (€)</th>
+                <th class="text-center">Acciones </th>
+
+            </thead>
+            <tbody id="listado">
+
+                <!-- Acá va el refreso de listado de productos ...-->
+            </tbody>
+        </table>
+
+    </maestro>
+
+    <nuevo id="nuevo" hidden>
+        <form class="vertical" id="registracion">
+            <datafield>
+                <legend> Registración de Nuevo Producto</legend>
+
+                <div class="horizontal">
+                    <input type="hidden" id="id" name="id" hidden>
+                    <label for="nombre_nuevo">Nombre:</label>
+                    <input type="text" id="nombre_nuevo" name="nombre_nuevo" required>
+                </div>
+                <div class="horizontal">
+                    <label for="descripcion_nuevo">Descripción:</label>
+                    <input type="text" id="descripcion_nuevo" name="descripcion_nuevo" required>
+                </div>
+
+
+                <div class="horizontal">
+                    <label for="cantidad_nuevo">Cantidad:</label>
+                    <input type="number" id="cantidad_nuevo" name="cantidad_nuevo" class="Roboto" required>
+                </div>
+                <div class="horizontal">
+                    <label for="precio_nuevo">Precio:</label>
+                    <input type="number" id="precio_nuevo" name="precio_nuevo" class="Roboto" required>
+                </div>
+                <div class="horizontal">
+                    <button id="boton_graba_nuevo" class="btn btn-success">Grabar</button>
+                    <button id="boton_cancela_nuevo" class="btn btn-warning">Cancelar</button>
+                </div>
+            </datafield>
+
+        </form>
+
+    </nuevo>
+
+    <cambioprecio id="edicion" hidden>
+        <form id="edicion_registro">
+            <datafield>
+                <legend> Edición </legend>
+                <div class="horizontal">
+                    <input type="hidden" id="id_edicion" name="id_edicion" hidden>
+                    <label for="nombre_edicion">Nombre Producto:</label>
+                    <input type="text" id="nombre_edicion" name="nombre_edicion" required>
+                </div>
+                <div class="horizontal">
+                    <label for="descripcion_edicion">Descripción:</label>
+                    <input type="text" id="descripcion_edicion" name="descripcion_edicion" required>
+                </div>
+                <div class="horizontal">
+                    <label for="cantidad_edicion">Cantidad: </label>
+                    <input type="number" id="cantidad_edicion" name="cantidad_edicion" required>
+                </div>
+                <div class="horizontal">
+                    <label for="precio_edicion">Nuevo Precio: </label>
+                    <input type="number" id="precio_edicion" name="precio_edicion" required>
+                </div>
+                <div class="horizontal">
+                    <button id="boton_graba_edicion" class="btn btn-success">Grabar</button>
+                    <button id="boton_cancela_edicion" class="btn btn-warning">Cancelar</button>
+                </div>
+            </datafield>
+        </form>
+    </cambioprecio>
+
+    <compraventa id="compraventa" hidden>
+        <form id="form_compraventa">
+            <datafield>
+                <legend id="legend_compraventa"> </legend>
+                <div class="horizontal">
+                    <input type="hidden" id="id_compraventa" name="id_edicion" hidden>
+                    <label for="nombre_compraventa">Nombre Producto:</label>
+                    <input type="text" id="nombre_compraventa" name="nombre_compraventa" required>
+                </div>
+                <div class="horizontal">
+                    <label for="cantidad_compraventa">Cantidad: </label>
+                    <input type="number" id="cantidad_compraventa" name="cantidad_compraventa" required>
+                </div>
+                <div class="horizontal">
+                    <button id="boton_graba_compraventa" class="btn btn-success">Grabar</button>
+                    <button id="boton_cancela_compraventa" class="btn btn-warning">Cancelar</button>
+                </div>
+            </datafield>
+        </form>
+    </compraventa>
+
+</body>
+
+</html>
