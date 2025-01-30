@@ -181,20 +181,22 @@ $(document).ready(function () {
         event.preventDefault();
 
         let $row = $(this).closest('tr');
-        let prodId = $row.find('td').eq(0).text();
-        let prodNombre = $row.find('td').eq(1).text();
-        let prodDescripcion = $row.find('td').eq(2).text();
-        let prodCantidad = $row.find('td').eq(3).text();
-        let prodPrecio = $row.find('td').eq(4).text();
+        let edicionId = $row.find('td').eq(0).text();
+        let edicionPartido = $row.find('td').eq(1).text();
+        let edicionDescripcion = $row.find('td').eq(2).text();
+        let edicionDeporte = $row.find('td').eq(3).text();
+        let edicionresultado = $row.find('td').eq(4).text();
+        let edicionApuesta = $row.find('td').eq(5).text();
 
         escondeDetalles();
-        let $precio = $("#edicion").show();
+        let $edicion = $("#edicion").show();
 
-        $("#id_edicion").val(prodId);
-        $("#nombre_edicion").val(prodNombre);
-        $("#descripcion_edicion").val(prodDescripcion);
-        $("#cantidad_edicion").val(prodCantidad);
-        $("#precio_edicion").val(prodPrecio);
+        $("#id_edicion").val(edicionId);
+        $("#nombre_edicion").val(edicionPartido);
+        $("#descripcion_edicion").val(edicionDescripcion);
+        $("#deporte_edicion").val(edicionDeporte);
+        $("#resultado_edicion").val(edicionDeporte);
+        $("#apuesta_edicion").val(edicionApuesta);
 
     });
 
@@ -204,21 +206,31 @@ $(document).ready(function () {
         event.preventDefault();
 
         let $precio = $("#edicion");
-        let prodId = Number($("#id_edicion").val());
-        let prodNombre = $("#nombre_edicion").val();
-        let prodDescripcion = $("#descripcion_edicion").val();
-        let prodPrecio = Number($("#precio_edicion").val());
-        let prodCantidad = Number($("#cantidad_edicion").val());
+        let edicionId = Number($("#id_edicion").val());
+        let edicionPartido = $("#partido_edicion").val();
+        let edicionDescripcion = $("#descripcion_edicion").val();
+        let edicionDeporte = Number($("#deporte_edicion").val());
+        let edicionResultado = Number($("#resultado_edicion").val());
+        let edicionApuesta = parseFloat($("#apuesta_edicion").val());
 
-        if (prodNombre.length > 0 &&
-            prodDescripcion.length > 0 &&
-            prodPrecio > 0 &&
-            prodCantidad >= 0) {
+        console.log(edicionId);
+        console.log(edicionPartido);
+        console.log(edicionDescripcion);
+        console.log(edicionDeporte);
+        console.log(edicionResultado);
+        console.log(edicionApuesta);
+
+        if (edicionPartido.length > 0 &&
+            edicionDescripcion.length > 0 &&
+            edicionDeporte.length > 0 &&
+            edicionResultado != "" &&
+            edicionApuesta > 0) {
 
 
-            let envio = { id: prodId, precio: prodPrecio, nombre: prodNombre, descripcion: prodDescripcion, cantidad: prodCantidad };
+            let envio = { id: edicionId, nombre, edicionPartido, descripcion: edicionDescripcion, 
+                         deporte: edicionDeporte, resultado: edicionResultado, apuesta: edicionApuesta};
             $.ajax({
-                url: 'http://localhost:1234/api/productos/edicion',
+                url: 'http://localhost:1234/api/partidos/' + edicionId,
                 method: "PUT",
                 contentType: "application/json",
                 data: JSON.stringify(envio),
@@ -233,14 +245,14 @@ $(document).ready(function () {
             });
         } else {
 
-            if (prodNombre.length == 0 ||
-                prodDescripcion.length == 0) {
+            if (edicionDescripcion.length == 0 ||
+                edicionPartido.length == 0) {
 
                 alert("Todos los campos deben ser completados.");
 
             } else {
 
-                alert("Precio no puede ser 0 o menor. La cantidad no puede ser negativa.")
+                alert("Apuesta no puede ser 0 o menor.")
             }
 
         }
@@ -297,7 +309,7 @@ $(document).ready(function () {
     });
 
 
-    // Graba los datos del registro a dar de alta. 
+    // Graba los datos del registro a dar de alta de una apuesta. 
     $("#boton_graba_nuevo").on("click", function (event) {
         event.preventDefault();
 
@@ -306,12 +318,6 @@ $(document).ready(function () {
         let deporte_nuevo = $('#deporte_nuevo').val();
         let resultado_nuevo = $('#resultado_nuevo').val();
         let apuesta_nuevo = $("#apuesta_nuevo").val();
-
-        console.log(partido_nuevo);
-        console.log(descripcion_nuevo);
-        console.log(deporte_nuevo);
-        console.log(resultado_nuevo);
-        console.log(apuesta_nuevo);
 
         if (partido_nuevo != "" &&
             descripcion_nuevo != "" &&
