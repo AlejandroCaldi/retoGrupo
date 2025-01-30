@@ -148,7 +148,7 @@ $(document).ready(function () {
 
     });
 
-    // Accionar del botón de Gana.  
+    // Accionar del botón de pierde.  
     $(document).on("click", ".boton_pierde", function (event) {
         event.preventDefault();
 
@@ -301,30 +301,38 @@ $(document).ready(function () {
     $("#boton_graba_nuevo").on("click", function (event) {
         event.preventDefault();
 
-        let nombre_nuevo = $("#nombre_nuevo").val();
+        let partido_nuevo = $("#partido_nuevo").val();
         let descripcion_nuevo = $('#descripcion_nuevo').val();
-        let cantidad_nuevo = $('#cantidad_nuevo').val();
-        let precio_nuevo = $("#precio_nuevo").val();
+        let deporte_nuevo = $('#deporte_nuevo').val();
+        let resultado_nuevo = $('#resultado_nuevo').val();
+        let apuesta_nuevo = $("#apuesta_nuevo").val();
 
-        if (nombre_nuevo != "" &&
+        console.log(partido_nuevo);
+        console.log(descripcion_nuevo);
+        console.log(deporte_nuevo);
+        console.log(resultado_nuevo);
+        console.log(apuesta_nuevo);
+
+        if (partido_nuevo != "" &&
             descripcion_nuevo != "" &&
-            cantidad_nuevo != "" &&
-            precio_nuevo != "" &&
-            cantidad_nuevo >= 0 &&
-            precio_nuevo > 0) {
+            deporte_nuevo != "" &&
+            resultado_nuevo != "" &&
+            apuesta_nuevo >= 0 &&
+            apuesta_nuevo > 0) {
 
             let envio = {
                 id: 0,
-                nombre: nombre_nuevo,
+                partido: partido_nuevo,
                 descripcion: descripcion_nuevo,
-                cantidad: cantidad_nuevo,
-                precio: precio_nuevo
+                deporte: deporte_nuevo,
+                resultado: parseInt(resultado_nuevo),
+                apuesta: parseFloat(apuesta_nuevo)
             };
 
             console.log(JSON.stringify(envio));
 
             $.ajax({
-                url: 'http://localhost:1234/api/productos/alta', // Adjusted by Parcel to remove "/api"
+                url: 'http://localhost:1234/api/partidos', 
                 type: 'POST',
                 contentType: 'application/json',
                 data: JSON.stringify(envio),

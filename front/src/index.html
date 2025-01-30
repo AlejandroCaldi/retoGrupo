@@ -31,8 +31,6 @@
                 <Id hidden>ID Producto</Id>
                 <th class="text-center">Partido:</th>
                 <th class="text-center">Descripción:</th>
-
-
                 <th class="text-center">Deporte</th>
                 <th class="text-center">Resultado</th>
                 <th class="text-center">Apuesta (€)</th>
@@ -60,29 +58,33 @@
 
                 <div class="horizontal">
                     <input type="hidden" id="id" name="id" hidden>
-                    <label for="nombre_nuevo">Partido:</label>
-                    <input type="text" id="nombre_nuevo" name="nombre_nuevo" required>
+                    <label for="partido_nuevo">Partido:</label>
+                    <input type="text" id="partido_nuevo" name="partido_nuevo" required>
                 </div>
                 <div class="horizontal">
                     <label for="descripcion_nuevo">Descripcion</label>
                     <input type="text" id="descripcion_nuevo" name="descripcion_nuevo" required>
                 </div>
                 <div class="horizontal">
-                    <label for="cantidad_nuevo">Deporte:</label>
-                    <input type="text" id="cantidad_nuevo" name="cantidad_nuevo" class="Roboto" required>
+                    <label for="deporte_nuevo">Deporte:</label>
+                    <input type="text" id="deporte_nuevo" name="deporte_nuevo" class="Roboto" required>
                 </div>
                 <div class="horizontal">
-                    <label for="resultado_nuevo">Resultado:</label>
-                    <input type="number" id="resultado_nuevo" name="resultado_nuevo" class="Roboto" required>
+                    <label for="resultado_nuevo">Resultado Nuevo:</label>
+                    <select id="resultado_nuevo" name="resultado_nuevo">
+                        <option value="1">1</option>
+                        <option value="0">0</option>
+                        <option value="-1">-1</option>
+                    </select>
                 </div>
                 <div class="horizontal">
-                    <label for="precio_nuevo">Apuesta:</label>
-                    <input type="number" id="precio_nuevo" name="precio_nuevo" class="Roboto" required>
+                    <label for="apuesta_nuevo">Apuesta:</label>
+                    <input type="number" id="apuesta_nuevo" name="apuesta_nuevo" class="Roboto" required>
                 </div>
                 <div class="horizontal">
                     <button id="boton_graba_nuevo" class="btn btn-success">Apostar</button>
                     <button id="boton_cancela_nuevo" class="btn btn-warning">Cancelar</button>
-                </div>
+                </div> 
             </datafield>
 
         </form>
@@ -118,26 +120,6 @@
         </form>
     </cambioprecio>
 
-    <!-- <compraventa id="compraventa" hidden>
-        <form id="form_compraventa">
-            <datafield>
-                <legend id="legend_compraventa"> </legend>
-                <div class="horizontal">
-                    <input type="hidden" id="id_compraventa" name="id_edicion" hidden>
-                    <label for="nombre_compraventa">Nombre Producto:</label>
-                    <input type="text" id="nombre_compraventa" name="nombre_compraventa" required>
-                </div>
-                <div class="horizontal">
-                    <label for="cantidad_compraventa">Cantidad: </label>
-                    <input type="number" id="cantidad_compraventa" name="cantidad_compraventa" required>
-                </div>
-                <div class="horizontal">
-                    <button id="boton_graba_compraventa" class="btn btn-success">Grabar</button>
-                    <button id="boton_cancela_compraventa" class="btn btn-warning">Cancelar</button>
-                </div>
-            </datafield>
-        </form>
-    </compraventa> -->
 
 </body>
 
