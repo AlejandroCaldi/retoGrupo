@@ -1,5 +1,4 @@
-
-.titulo{
+.titulo {
   font-size: 60px;
   font-family: 'Times New Roman', Times, serif;
   text-align: center;
@@ -7,42 +6,50 @@
   text-decoration: underline;
 }
 
-body{
+body {
 
-    margin-left: 10px;
+  margin-left: 10px;
 }
 
 .vertical {
+  display: flex;
+  flex-direction: column;
+  padding: 3px;
+  margin: 3px;
+  gap: 5px;
+}
 
-    display: flex;
-    flex-direction: column;
-    padding: 3px;
-    margin: 3px;
-    gap: 5px;
+.leyenda {
+  text-decoration: underline;
+  font-size: 35px;
 }
 
 .horizontal {
-    display:flex;
-    flex-direction: row;
-    padding: 3px;
-    gap: 5px;
+  display: flex;
+  flex-direction: row;
+  padding: 3px;
+  gap: 5px;
 }
 
 .botonera {
 
-    margin: 2px;
+  margin: 2px;
 }
 
 table-bordered {
-    border: 1px solid #585858;
-  }
-  .table-bordered td, .table-bordered th {
-    border-left: 1px solid #585858;
-  }
-  .table-bordered td:first-child, .table-bordered th:first-child {
-    border-left: 0;
-  }
+  border: 1px solid #585858;
+}
+
+.table-bordered td,
+.table-bordered th {
+  border-left: 1px solid #585858;
+}
+
+.table-bordered td:first-child,
+.table-bordered th:first-child {
+  border-left: 0;
+}
 
 .table-nonfluid {
-    width: 70% !important;
- }
+  width: 70% !important;
+}
