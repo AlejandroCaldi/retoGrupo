@@ -14,7 +14,6 @@ $(document).ready(function () {
 
                 $.get("http://localhost:1234/api/partidos", function (data) {
 
-                    console.log(data);
 
                     let $padre = $('#listado');
                     let $maestro = $("maestro");
@@ -29,8 +28,9 @@ $(document).ready(function () {
                         $linea.append($('<td class="renglon mt-3 md-3" style=display:none>').text(x.id));
                         $linea.append($('<td class="renglon mt-3 md-3">').text(x.nombre));
                         $linea.append($('<td class="renglon mt-3md-3">').text(x.descripcion));
-                        $linea.append($('<td class="renglon mt-3md-3 text-right">').text(x.cantidad));
-                        $linea.append($('<td class="renglon mt-3md-3 text-right">').text(x.precio.toFixed(2)));
+                        $linea.append($('<td class="renglon mt-3md-3 text-right">').text(x.deporte));
+                        $linea.append($('<td class="renglon mt-3md-3 text-right">').text(x.resultado));
+                        $linea.append($('<td class="renglon mt-3md-3 text-right">').text(x.apuesta.toFixed(2)));
                         $linea.append($('<td class="text-center">').append($(`<button class="btn btn-success btn-lg botonera text-center boton_compra">Compra
                                 </button><button class="btn btn-info btn-lg botonera boton_reposicion">Reposición</button>
                                 </button><button class="btn btn-warning btn-lg botonera boton_edicion">Editar</button>
@@ -120,14 +120,14 @@ $(document).ready(function () {
 
         });
 
-        // Accionar de clinck del botón de reposición. 
+        // Accionar de click del botón de reposición. 
         $('#listado').on("click", ".boton_reposicion", function (event) {
             event.preventDefault();
             operacion_compraventa = 1;
             vuelcoValores(event, "Reposición")
         });
 
-        // Acckonar del botón de grabación sea de reposición o venta. 
+        // Accionar del botón de grabación sea de reposición o venta. 
         $("#boton_graba_compraventa").on("click", function (event) {
             event.preventDefault();
 
