@@ -1,7 +1,7 @@
 
 let articulos = [];
 
-let operacion_compraventa = 0; // 0 equivale a compra, 1 a reposición
+let operacion_ganapierde = 0; // 0 equivale a compra, 1 a reposición
 
 $(document).ready(function () {
 
@@ -31,8 +31,8 @@ $(document).ready(function () {
                         $linea.append($('<td class="renglon mt-3md-3 text-right">').text(x.deporte));
                         $linea.append($('<td class="renglon mt-3md-3 text-right">').text(x.resultado));
                         $linea.append($('<td class="renglon mt-3md-3 text-right">').text(x.apuesta.toFixed(2)));
-                        $linea.append($('<td class="text-center">').append($(`<button class="btn btn-success btn-lg botonera text-center boton_compra">Compra
-                                </button><button class="btn btn-info btn-lg botonera boton_reposicion">Reposición</button>
+                        $linea.append($('<td class="text-center">').append($(`<button class="btn btn-success btn-lg botonera text-center boton_gana">Gana
+                                </button><button class="btn btn-info btn-lg botonera boton_pierde">Pierde</button>
                                 </button><button class="btn btn-warning btn-lg botonera boton_edicion">Editar</button>
                                 </button><button class="btn btn-danger btn-lg botonera boton_baja">Borrar</button>
                                 `)));
@@ -60,7 +60,7 @@ $(document).ready(function () {
     };
 
 
-    /* Función de vuelco de valores en funcciójn de en qué renglón se presiona un botón dado. 
+    /* Función de vuelco de valores en funcción de en qué renglón se presiona un botón dado. 
     * Implementado para Compras y Reposición. Edición es distinto. 
     * @param event: El evento del click en el renglón especñifico de la trabla. Si no, no lo hereda. 
     * @param texto: El String con el que se desea rellenar el <legend> de compra_venta.
@@ -112,69 +112,67 @@ $(document).ready(function () {
 
     $(document).ready(function () {
 
-        // Accionar tras botón de compra
-        $('#listado').on("click", ".boton_compra", function (event) {
-            event.preventDefault();
-            operacion_compraventa = 0;
-            vuelcoValores(event, "Compra")
-
-        });
-
         // Accionar de click del botón de reposición. 
-        $('#listado').on("click", ".boton_reposicion", function (event) {
+        $('#listado').on("click", ".boton_pierde", function (event) {
             event.preventDefault();
-            operacion_compraventa = 1;
+            operacion_ganapierde = 1;
             vuelcoValores(event, "Reposición")
         });
 
-        // Accionar del botón de grabación sea de reposición o venta. 
-        $("#boton_graba_compraventa").on("click", function (event) {
+        // Accionar del botón de Gana.  
+        $(document).on("click", ".boton_gana", function (event) {
             event.preventDefault();
 
-            let prodId = $("#id_compraventa").val();
-            let prodCantidad = $("#cantidad_compraventa").val();
+            let $row = $(event.target).closest('tr');
+            let id = $.trim($row.find('td').eq(0).text());
 
-            let envio = { id: prodId, precio: 0, nombre: "", descripcion: "", cantidad: prodCantidad };
-
-            if (operacion_compraventa == 0) {
-                $.ajax({
-                    url: 'http://localhost:1234/api/productos/compra',
-                    method: "POST",
-                    contentType: "application/json",
-                    data: JSON.stringify(envio),
-                    success: function (result) {
-                        console.log("resultado de la compra: " + result);
-                    },
-                    error: function (xhr, status, error) {
-                        console.log("resultado de la compra: " + error);
-                        alert("La compra excedería la cantidad en inventario");
-                    }
-                });
+            if (!id) {
+                console.error("No se encontró un ID válido en la fila.");
+                alert("No se encontró un ID válido.");
+                return;
             }
 
-            if (operacion_compraventa == 1) {
-                $.ajax({
-                    url: 'http://localhost:1234/api/productos/reposicion',
-                    method: "POST",
-                    contentType: "application/json",
-                    data: JSON.stringify(envio),
-                    success: function (result) {
-                        console.log("resultado de la reposición: " + result);
-                    },
-                    error: function (xhr, status, error) {
-                        console.log("resultado de la reposición: " + error);
-                    }
-                });
-            }
-
-            refrescarListado(); // Make sure this function doesn't cause a page reload
+            $.ajax({
+                url: `http://localhost:1234/api/partidos/${id}/gana`,
+                type: "POST",
+                success: function (response) {
+                    console.log("Ha cambiado el valor del resultado: " + response);
+                    refrescarListado();
+                },
+                error: function (xhr, status, error) {
+                    console.error("Ha habido un problema en registrar el cambio: " + xhr.responseText);
+                    alert("Ha habido un problema en registrar el cambio: " + xhr.responseText);
+                }
+            });
         });
+
     });
 
-    // Cancela operación de cambio de precio. Borra el detalle y refresca el maestro. 
-    $("#boton_cancela_compraventa").on("click", function (event) {
+    // Accionar del botón de Gana.  
+    $(document).on("click", ".boton_pierde", function (event) {
         event.preventDefault();
-        escondeDetalles();
+
+        let $row = $(event.target).closest('tr');
+        let id = $.trim($row.find('td').eq(0).text());
+
+        if (!id) {
+            console.error("No se encontró un ID válido en la fila.");
+            alert("No se encontró un ID válido.");
+            return;
+        }
+
+        $.ajax({
+            url: `http://localhost:1234/api/partidos/${id}/pierde`,
+            type: "POST",
+            success: function (response) {
+                console.log("Ha cambiado el valor del resultado: " + response);
+                refrescarListado();
+            },
+            error: function (xhr, status, error) {
+                console.error("Ha habido un problema en registrar el cambio: " + xhr.responseText);
+                alert("Ha habido un problema en registrar el cambio: " + xhr.responseText);
+            }
+        });
     });
 
 
