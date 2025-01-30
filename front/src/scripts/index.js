@@ -209,7 +209,7 @@ $(document).ready(function () {
         let edicionId = Number($("#id_edicion").val());
         let edicionPartido = $("#partido_edicion").val();
         let edicionDescripcion = $("#descripcion_edicion").val();
-        let edicionDeporte = Number($("#deporte_edicion").val());
+        let edicionDeporte = $("#deporte_edicion").val();
         let edicionResultado = Number($("#resultado_edicion").val());
         let edicionApuesta = parseFloat($("#apuesta_edicion").val());
 
@@ -222,12 +222,12 @@ $(document).ready(function () {
 
         if (edicionPartido.length > 0 &&
             edicionDescripcion.length > 0 &&
-            edicionDeporte.length > 0 &&
+            edicionDeporte != "" &&
             edicionResultado != "" &&
             edicionApuesta > 0) {
 
 
-            let envio = { id: edicionId, nombre, edicionPartido, descripcion: edicionDescripcion, 
+            let envio = { id: edicionId, nombre: edicionPartido, descripcion: edicionDescripcion, 
                          deporte: edicionDeporte, resultado: edicionResultado, apuesta: edicionApuesta};
             $.ajax({
                 url: 'http://localhost:1234/api/partidos/' + edicionId,
