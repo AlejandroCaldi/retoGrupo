@@ -51,12 +51,9 @@ table-bordered {
 }
 
 .table-nonfluid {
-<<<<<<< HEAD
+
   width: 70% !important;
 }
-=======
-    width: 70% !important;
- }
 
   .posicion {
 
@@ -87,4 +84,4 @@ table-bordered {
 
   box-shadow: 0px 4px 0px #cc7000;
  }
->>>>>>> origin/master
+
