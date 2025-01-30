@@ -1,7 +1,7 @@
 
 let articulos = [];
 
-let operacion_compraventa = 0; // 0 equivale a compra, 1 a reposición
+let operacion_ganapierde = 0; // 0 equivale a compra, 1 a reposición
 
 $(document).ready(function () {
 
@@ -31,8 +31,8 @@ $(document).ready(function () {
                         $linea.append($('<td class="renglon mt-3md-3 text-right">').text(x.deporte));
                         $linea.append($('<td class="renglon mt-3md-3 text-right">').text(x.resultado));
                         $linea.append($('<td class="renglon mt-3md-3 text-right">').text(x.apuesta.toFixed(2)));
-                        $linea.append($('<td class="text-center">').append($(`<button class="btn btn-success btn-lg botonera text-center boton_compra">Compra
-                                </button><button class="btn btn-info btn-lg botonera boton_reposicion">Reposición</button>
+                        $linea.append($('<td class="text-center">').append($(`<button class="btn btn-success btn-lg botonera text-center boton_gana">Gana
+                                </button><button class="btn btn-info btn-lg botonera boton_reposicion">Pierde</button>
                                 </button><button class="btn btn-warning btn-lg botonera boton_edicion">Editar</button>
                                 </button><button class="btn btn-danger btn-lg botonera boton_baja">Borrar</button>
                                 `)));
@@ -113,9 +113,9 @@ $(document).ready(function () {
     $(document).ready(function () {
 
         // Accionar tras botón de compra
-        $('#listado').on("click", ".boton_compra", function (event) {
+        $('#listado').on("click", ".boton_gana", function (event) {
             event.preventDefault();
-            operacion_compraventa = 0;
+            operacion_ganapierde = 0;
             vuelcoValores(event, "Compra")
 
         });
@@ -123,7 +123,7 @@ $(document).ready(function () {
         // Accionar de click del botón de reposición. 
         $('#listado').on("click", ".boton_reposicion", function (event) {
             event.preventDefault();
-            operacion_compraventa = 1;
+            operacion_ganapierde = 1;
             vuelcoValores(event, "Reposición")
         });
 
@@ -136,7 +136,7 @@ $(document).ready(function () {
 
             let envio = { id: prodId, precio: 0, nombre: "", descripcion: "", cantidad: prodCantidad };
 
-            if (operacion_compraventa == 0) {
+            if (operacion_ganapierde == 0) {
                 $.ajax({
                     url: 'http://localhost:1234/api/productos/compra',
                     method: "POST",
@@ -152,7 +152,7 @@ $(document).ready(function () {
                 });
             }
 
-            if (operacion_compraventa == 1) {
+            if (operacion_ganapierde == 1) {
                 $.ajax({
                     url: 'http://localhost:1234/api/productos/reposicion',
                     method: "POST",
