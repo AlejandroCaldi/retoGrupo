@@ -12,7 +12,7 @@ $(document).ready(function () {
         $.get("http://my-json-server.typicode.com/desarrollo-seguro/dato/solicitudes",
             function (result) {
 
-                $.get("http://localhost:1234/api/productos", function (data) {
+                $.get("http://localhost:1234/api/partidos", function (data) {
 
                     console.log(data);
 
