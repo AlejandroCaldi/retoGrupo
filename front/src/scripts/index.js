@@ -1,15 +1,13 @@
 
 let articulos = [];
 
-let operacion_ganapierde = 0; // 0 equivale a compra, 1 a reposición
-
 $(document).ready(function () {
 
 
-    // Borra y recarga abl con el maestro del inventario. 
+    // Borra y recarga abl con el maestro de apuestas. 
     function refrescarListado() {
 
-        $.get("http://my-json-server.typicode.com/desarrollo-seguro/dato/solicitudes",
+        $.get("http://my-json-server.typicode.com/desarrollo-seguro/dato/solicitudes", // Esto queda por la implementación de parcel?
             function (result) {
 
                 $.get("http://localhost:1234/api/partidos", function (data) {
@@ -59,40 +57,13 @@ $(document).ready(function () {
 
     };
 
-
-    /* Función de vuelco de valores en funcción de en qué renglón se presiona un botón dado. 
-    * Implementado para Compras y Reposición. Edición es distinto. 
-    * @param event: El evento del click en el renglón especñifico de la trabla. Si no, no lo hereda. 
-    * @param texto: El String con el que se desea rellenar el <legend> de compra_venta.
-    **/
-    function vuelcoValores(event, texto) {
-
-        if (event) event.preventDefault();
-
-        let $row = $(event.target).closest('tr');
-        let prodId = $row.find('td').eq(0).text();
-        let prodNombre = $row.find('td').eq(1).text();
-        let prodCantidad = $row.find('td').eq(3).text();
-
-        $("#legend_compraventa").text(texto);
-        $("#id_compraventa").val(prodId);
-        $("#nombre_compraventa").val(prodNombre);
-        $("#nombre_compraventa").prop('disabled', true);
-        $("#cantidad_compraventa").val(prodCantidad);
-        escondeDetalles();
-        $("#compraventa").show();
-
-        window.vuelcoValores = vuelcoValores;
-
-    }
-
     //Esconde todos los detalles. Llamada por todos los procesos de invocado de detalle para luego solo llamar
     //el que interesa a la operación. 
     function escondeDetalles() {
 
         $("#edicion").hide();
         $("#nuevo").hide();
-        $("#compraventa").hide();
+        $("#editaapuesta").hide();
 
         window.escondeDetalles = escondeDetalles;
 
@@ -111,13 +82,6 @@ $(document).ready(function () {
     // Definiciones de eventos. (Clicks)
 
     $(document).ready(function () {
-
-        // Accionar de click del botón de reposición. 
-        $('#listado').on("click", ".boton_pierde", function (event) {
-            event.preventDefault();
-            operacion_ganapierde = 1;
-            vuelcoValores(event, "Reposición")
-        });
 
         // Accionar del botón de Gana.  
         $(document).on("click", ".boton_gana", function (event) {
@@ -185,22 +149,22 @@ $(document).ready(function () {
         let edicionPartido = $row.find('td').eq(1).text();
         let edicionDescripcion = $row.find('td').eq(2).text();
         let edicionDeporte = $row.find('td').eq(3).text();
-        let edicionresultado = $row.find('td').eq(4).text();
+        let edicionResultado = $row.find('td').eq(4).text();
         let edicionApuesta = $row.find('td').eq(5).text();
 
         escondeDetalles();
         let $edicion = $("#edicion").show();
 
         $("#id_edicion").val(edicionId);
-        $("#nombre_edicion").val(edicionPartido);
+        $("#partido_edicion").val(edicionPartido);
         $("#descripcion_edicion").val(edicionDescripcion);
         $("#deporte_edicion").val(edicionDeporte);
-        $("#resultado_edicion").val(edicionDeporte);
+        $("#resultado_edicion").val(edicionResultado);
         $("#apuesta_edicion").val(edicionApuesta);
 
     });
 
-    // Graba el cambio de precio enviando petición al servidor.
+    // Graba los datos editados.
     $("#boton_graba_edicion").on("click", function (event) {
 
         event.preventDefault();
@@ -213,19 +177,15 @@ $(document).ready(function () {
         let edicionResultado = Number($("#resultado_edicion").val());
         let edicionApuesta = parseFloat($("#apuesta_edicion").val());
 
-        console.log(edicionId);
-        console.log(edicionPartido);
-        console.log(edicionDescripcion);
-        console.log(edicionDeporte);
-        console.log(edicionResultado);
-        console.log(edicionApuesta);
-
         if (edicionPartido.length > 0 &&
             edicionDescripcion.length > 0 &&
             edicionDeporte != "" &&
-            edicionResultado != "" &&
-            edicionApuesta > 0) {
+            edicionApuesta > 0.00) {
 
+            if(edicionResultado == "") {
+
+                edicionResultado = 0;
+            }   
 
             let envio = { id: edicionId, nombre: edicionPartido, descripcion: edicionDescripcion, 
                          deporte: edicionDeporte, resultado: edicionResultado, apuesta: edicionApuesta};
@@ -240,13 +200,17 @@ $(document).ready(function () {
                     refrescarListado();
                 },
                 error: function (xhr, status, error) {
+                    let tipoError = JSON.parse(xhr.responseText);
                     console.log('Error: ' + error);
+                    alert('Error: ' + error + ". " + tipoError.errors[0].objectName + ": "+ tipoError.errors[0].rejectedValue);
                 }
             });
         } else {
 
             if (edicionDescripcion.length == 0 ||
-                edicionPartido.length == 0) {
+                edicionPartido.length == 0 || 
+                edicionDeporte == "" || 
+                edicionResultado == "") {
 
                 alert("Todos los campos deben ser completados.");
 

@@ -32,9 +32,9 @@ public class PartidoController {
     private Map<Long, Partido> partidos = new HashMap<>();
 
     public PartidoController() {
-        partidos.put(1l, new Partido(1, "Partido A", "Descripción A", "futbol", 0, 55.5f));
-        partidos.put(2l, new Partido(2, "Partido B", "Descripción B", "tenis", 1, 10.0f));
-        partidos.put(3l, new Partido(3, "Partido C", "Descripción C", "tenis", -1, 10.0f)); // Partido ya perdido
+        partidos.put(1l, new Partido(1, "Partido A", "Descripción A", "Futbol", 0, 55.5f));
+        partidos.put(2l, new Partido(2, "Partido B", "Descripción B", "Tenis", 1, 10.0f));
+        partidos.put(3l, new Partido(3, "Partido C", "Descripción C", "Tenis", -1, 10.0f)); // Partido ya perdido
     }
 
 
