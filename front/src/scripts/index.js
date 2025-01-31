@@ -33,6 +33,7 @@ $(document).ready(function () {
                                 </button><button class="btn btn-info btn-lg botonera boton_pierde">Pierde</button>
                                 </button><button class="btn btn-warning btn-lg botonera boton_edicion">Editar</button>
                                 </button><button class="btn btn-danger btn-lg botonera boton_baja">Borrar</button>
+                                </button><button class="btn btn-info btn-lg botonera boton_descarga" data-id="123">Descargar</button>
                                 `)));
 
                         $padre.append($linea);
@@ -110,7 +111,22 @@ $(document).ready(function () {
             });
         });
 
-    });
+
+        $(document).on("click", ".boton_descarga", function (event) {
+            let $row = $(event.target).closest('tr');
+            let id = $.trim($row.find('td').eq(0).text());
+
+            let url = `http://localhost:1234/api/partidos/download?id=${id}&nombreFichero=${encodeURIComponent(nombreFichero)}`;
+
+            let a = document.createElement("a");
+            a.href = url;
+            a.download = ""; 
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+        });
+
+
 
     // Accionar del botón de pierde.  
     $(document).on("click", ".boton_pierde", function (event) {
@@ -137,6 +153,7 @@ $(document).ready(function () {
                 alert("Ha habido un problema en registrar el cambio: " + xhr.responseText);
             }
         });
+
     });
 
 
@@ -164,6 +181,8 @@ $(document).ready(function () {
 
     });
 
+});
+
     // Graba los datos editados.
     $("#boton_graba_edicion").on("click", function (event) {
 
@@ -182,13 +201,15 @@ $(document).ready(function () {
             edicionDeporte != "" &&
             edicionApuesta > 0.00) {
 
-            if(edicionResultado == "") {
+            if (edicionResultado == "") {
 
                 edicionResultado = 0;
-            }   
+            }
 
-            let envio = { id: edicionId, nombre: edicionPartido, descripcion: edicionDescripcion, 
-                         deporte: edicionDeporte, resultado: edicionResultado, apuesta: edicionApuesta};
+            let envio = {
+                id: edicionId, nombre: edicionPartido, descripcion: edicionDescripcion,
+                deporte: edicionDeporte, resultado: edicionResultado, apuesta: edicionApuesta
+            };
             $.ajax({
                 url: 'http://localhost:1234/api/partidos/' + edicionId,
                 method: "PUT",
@@ -202,14 +223,14 @@ $(document).ready(function () {
                 error: function (xhr, status, error) {
                     let tipoError = JSON.parse(xhr.responseText);
                     console.log('Error: ' + error);
-                    alert('Error: ' + error + ". " + tipoError.errors[0].objectName + ": "+ tipoError.errors[0].rejectedValue);
+                    alert('Error: ' + error + ". " + tipoError.errors[0].objectName + ": " + tipoError.errors[0].rejectedValue);
                 }
             });
         } else {
 
             if (edicionDescripcion.length == 0 ||
-                edicionPartido.length == 0 || 
-                edicionDeporte == "" || 
+                edicionPartido.length == 0 ||
+                edicionDeporte == "" ||
                 edicionResultado == "") {
 
                 alert("Todos los campos deben ser completados.");
@@ -302,7 +323,7 @@ $(document).ready(function () {
             console.log(JSON.stringify(envio));
 
             $.ajax({
-                url: 'http://localhost:1234/api/partidos', 
+                url: 'http://localhost:1234/api/partidos',
                 type: 'POST',
                 contentType: 'application/json',
                 data: JSON.stringify(envio),
@@ -320,7 +341,7 @@ $(document).ready(function () {
 
             if (partido_nuevo == "" ||
                 descripcion_nuevo == "" ||
-                deporte_nuevo == "" || 
+                deporte_nuevo == "" ||
                 resultado_nuevo == "" ||
                 apuesta_nuevo == "") {
 
