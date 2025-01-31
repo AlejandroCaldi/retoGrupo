@@ -160,7 +160,7 @@ public class PartidoController {
 
     // Y ahora descargamos el fichero subido
     @GetMapping("/download")
-    public ResponseEntity<byte[]> downloadFile(@RequestParam("id") long id) {
+    public ResponseEntity<byte[]> downloadFile(@RequestParam("id") long id, @RequestParam("nombreFichero") String nombreFichero) {
         // Recogemos el fichero del partido
         Partido partido = partidos.get(id);
         if (partido == null) {
@@ -170,6 +170,7 @@ public class PartidoController {
         try {
             // Leer el archivo de la carpeta temporal del sistema operativo
             String tempDir = System.getProperty("java.io.tmpdir");
+            partido.setNombreFichero(nombreFichero);
             Path tempFile = Paths.get(tempDir, partido.getNombreFichero());
             byte[] contenido = Files.readAllBytes(tempFile);
 
